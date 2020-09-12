@@ -1,0 +1,40 @@
+Desde carpeta principal, el "-y" es opcional
+ > npm init -y
+
+Llenar datos e instalar Babel en proyecto
+ > npm i -D @babel/preset-env @babel/cli @babel/core @babel/polyfill
+ > npm i core-js
+
+Crear carpteta "src" en proyecto, donde estará el codigo en ES6 a transformar
+Dejar codigo en carpeta: "src/loquesea.js"
+
+Compilar archivos en carpeta "dist/main/"
+ > npx babel src/ -d dist/main/
+
+Crear en la carpeta principal el archivo "babel.config.json", con el siguiente contenido:
+
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1"
+        },
+        "useBuiltIns": "usage",
+        "corejs": "3.6.4",
+        "forceAllTransforms": true
+      }
+    ]
+  ]
+}
+
+Ejecutar el siguiente comando, que compilara con Babel los archivos de src a dist/main/
+ > npx babel -d dist/main/ src/ --config-file ./babel.config.json
+
+Finalmente ejecuta el codigo para verificar si funcion
+ > node dist/main/loquesea.js
+
